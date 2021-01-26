@@ -67,7 +67,7 @@ func creatRow1(db *gorm.DB)  {
 //	创建一条新数据
 func creatRow2(db *gorm.DB)  {
 	user := User{
-		Name :"李四",
+		Name :"李四sss",
 		Age:19,
 		Active:1,
 		ActivedAt:time.Now(),
