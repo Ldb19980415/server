@@ -4,7 +4,8 @@ package router
 
 import (
     "github.com/gin-gonic/gin"
-	"goserver/handler"
+	"goserver/handler/auth"
+	// "goserver/handler"
 	// "goserver/dao"
 	// "gomod/middlewares"
 	// "net/http"
@@ -19,12 +20,18 @@ func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	// router.Use(middlewares.Cors())
 
-	auth := router.Group("/auth")
+	// 路由分组
+	authRouter := router.Group("/auth")
 	{
-		auth.POST("/login", handler.LoginHandler)
-		auth.POST("/logout", handler.LogoutHandler)
+		authRouter.POST("/login", auth.LoginHandler)
+		authRouter.POST("/logout", auth.LogoutHandler)
 	}
 
+	// 路由不分组
+	// router.GET("/books", handler.GetBooks)
+
+	
+	
 
 
 	// 注册自定义验证器
@@ -33,100 +40,7 @@ func SetupRouter() *gin.Engine {
 	// }
 	// router.GET("/bookable", getBookable)
 
-
-
-
-
-    // 添加 Get 请求路由
-    // router.GET("/", func(context *gin.Context) {
-    //     context.String(http.StatusOK, handler.UserSave)
-	// })
-	// router.GET("/v0/", handler.UserSave)
-	// router.POST("/v0/",handler.RetHelloGinAndMethod)
-	// // router.GET("/user/:name",handler.Save)			//支持在路径中传参，通过context.Param来获取对应参数，如果当前的context.Param("name")
-	// //一般用不到，我也灭整明白怎么用。
-	// router.GET("/v0/save",handler.UserSaveByQuery)
-	// router.GET("/v0/ldbtest",handler.UserSaveByQuery)
-
-
-	// // 路由分组
-	// v1 := router.Group("/v1")
-	// {
-	// 	v1.POST("/login", handler.UserSave)
-	// 	// v1.POST("/submit", submitEndpoint)
-	// 	// v1.POST("/read", readEndpoint)
-	// }
-
-	// v2 := router.Group("/v2")
-	// {
-	// 	v2.POST("/login", handler.UserSave)
-	// 	// v2.POST("/submit", submitEndpoint)
-	// 	// v2.POST("/read", readEndpoint)
-	// }
-
-
-	// router.POST("/form_post", func(c *gin.Context) {
-	// 	message := c.PostForm("age")
-	// 	nick := c.DefaultPostForm("name", "kim")
-
-	// 	c.JSON(200, gin.H{
-	// 		"status":  "posted",
-	// 		"message": message,
-	// 		"nick":    nick,
-	// 	})
-	// })
-
-
-
-	// router.POST("/test", func(context *gin.Context) {
-	// 	var person Person
-    //     // 这里我确定传过来的一定是JSON所以用ShouldBindJSON，否则可以用ShouldBind
-	// 	if err := context.ShouldBindJSON(&person); err != nil { 
-	// 		context.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": err.Error(),
-	// 		})
-	// 		return
-	// 	}
-	// 	context.JSON(http.StatusOK, gin.H{
-	// 		"success": true,
-	// 	})
-	// })
-
-
-	
-    // // 添加 Post 请求路由
-    // router.POST("/", func(context *gin.Context) {
-    //     context.String(http.StatusOK, RetHelloGinAndMethod)
-    // })
-    // // 添加 Put 请求路由 
-    // router.PUT("/", func(context *gin.Context) {
-    //     context.String(http.StatusOK, RetHelloGinAndMethod)
-    // })
-    // // 添加 Delete 请求路由
-    // router.DELETE("/", func(context *gin.Context) {
-    //     context.String(http.StatusOK, RetHelloGinAndMethod)
-    // })
-    // // 添加 Patch 请求路由
-    // router.PATCH("/", func(context *gin.Context) {
-    //     context.String(http.StatusOK, RetHelloGinAndMethod)
-    // })
-    // // 添加 Head 请求路由
-    // router.HEAD("/", func(context *gin.Context) {
-    //     context.String(http.StatusOK, RetHelloGinAndMethod)
-    // })
-    // // 添加 Options 请求路由
-    // router.OPTIONS("/", func(context *gin.Context) {
-    //     context.String(http.StatusOK, RetHelloGinAndMethod)
-	// })
-	
-
-
 	// 自定义一个参数校验器
-
-
-
-
-
     return router
 }
 // type Person struct {
