@@ -2,20 +2,23 @@ package main
 
 import (
 	"fmt"
-	"gorm.io/gorm"
+	// "gorm.io/gorm"
 	// "goserver/utils"
-	"goserver/dao"
+	// "goserver/dao"
 	// "github.com/gin-gonic/gin"
 	"goserver/router"
+
+
+	
 )
 type jhdkj  interface{
 
 }
 var port string = "0.0.0.0:3005"
-var db *gorm.DB
-func init()  {
-	db = dao.DBpool()
-}
+// var db *gorm.DB
+// func init()  {
+// 	db = dao.DBpool()
+// }
 
 func main()  {
 	//生成密钥对，保存到文件
@@ -31,7 +34,9 @@ func main()  {
 	// 操作数据库
 	// dao.CreatRow1(db)
 	// dao.CreatRow2(db)
-	router.CreateApp(port)
+	router1 := router.SetupRouter()
+
+	router1.Run(port)
 }
 
 

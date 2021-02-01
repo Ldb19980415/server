@@ -9,15 +9,22 @@ import (
 )
 
 type User struct {
-	ID           uint
-	Name         string
-	Email        *string
+	ID           uint  `json:"id"`
+	Name         string  `json:"name"`
+	Email        *string	`json:"email"`
 	Age          uint8
 	Active       uint8
 	MemberNumber sql.NullString
 	ActivedAt    time.Time
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
+}
+
+type UserInfo struct {
+	ID	uint	`json:"id"`
+	UserName	string	`json:"username"`
+	PassWord	string 	`json:"password"`
+	CreatAt		time.Time	`gorm:"default",json:"-"`
 }
 
 func DBpool() *gorm.DB {
@@ -40,7 +47,7 @@ func DBpool() *gorm.DB {
 	
 	// SetConnMaxLifetime 设置了连接可复用的最大时间。
 	sqlDB.SetConnMaxLifetime(time.Hour)
-
+	db.AutoMigrate(&UserInfo{})
 	// db.AutoMigrate(&User{})			迁移数据表，如果没有该表会自动的给予创建
 	// creatRow1(db)
 	return db
