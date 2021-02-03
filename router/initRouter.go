@@ -5,6 +5,7 @@ package router
 import (
     "github.com/gin-gonic/gin"
 	"goserver/handler/auth"
+	"goserver/handler/sunjie"
 	// "goserver/handler"
 	// "goserver/dao"
 	// "gomod/middlewares"
@@ -27,6 +28,11 @@ func SetupRouter() *gin.Engine {
 		authRouter.POST("/logout", auth.LogoutHandler)
 	}
 
+	sunjieRouter := router.Group("/sunjie")
+	{
+		sunjieRouter.POST("/create",sunjie.CreateWeightHandler)
+		sunjieRouter.GET("/search",sunjie.SearchWeightHandler)
+	}
 	// 路由不分组
 	// router.GET("/books", handler.GetBooks)
 
